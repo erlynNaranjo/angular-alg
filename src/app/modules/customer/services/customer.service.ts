@@ -14,4 +14,12 @@ export class CustomerService {
   getMovie() {
     return this.https.get(BASE_URL + '/movies');
 }
+
+  deleteMovie(id: number) {
+  return this.https.delete(`${BASE_URL}/movies/${id}`);
+}
+
+createMovie(movieData: any) {
+  return this.https.post(`${BASE_URL}/movies`, movieData);
+}
 }
