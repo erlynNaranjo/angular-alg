@@ -22,4 +22,10 @@ export class CustomerService {
 createMovie(movieData: any) {
   return this.https.post(`${BASE_URL}/movies`, movieData);
 }
+
+updateMovie(id: number, movieData: any) {
+  return this.https.put(`${BASE_URL}/movies/${id}`, movieData);
+}
+
+
 }

@@ -1,3 +1,95 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" (submit)="searchMovies()">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchTerm" name="searchTitle">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!--  Modal create-->
+
+
+<!--  Modal create-->
+<div class="modal fade" id="primerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="primerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="primerModalLabel">AGREGAR PELÍCULA</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <!--Formulario-->
+         <div class="container">
+          <form>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Título</span>
+              <input type="text" class="form-control" placeholder="Ingrese el título de la película" [(ngModel)]="movieData.title" name="title">
+            </div>
+        
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon2">Categoría</span>
+              <input type="text" class="form-control" placeholder="Ingrese la categoría de la película" [(ngModel)]="movieData.category" name="category">
+            </div>
+        
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon3">Año</span>
+              <input type="number" class="form-control" placeholder="Ingrese el año de la película" [(ngModel)]="movieData.year" name="year">
+            </div>
+        
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon4">Calificación</span>
+              <input type="number" class="form-control" placeholder="Ingrese la calificación de la película" [(ngModel)]="movieData.rating" name="rating">
+            </div>
+        
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon5">Descripción</span>
+              <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.overview" name="overview">
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-success" (click)="createMovie()">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--Tabla de Peliculas-->
 <section id="speakers" class="mt-4 mb-4">
     <div class="container">
       <div class="row">
@@ -7,24 +99,35 @@
           <br>  
         </div>
       </div>
-
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" *ngIf="data.length > 0">
-            <div class="col" *ngFor="let movie of data">
-            <div class="card h-100">
-                <img [src]="movie.imageURL" class="card-img-top" [alt]="movie.title">
-                <div class="card-body">
+<!--Presentación de películas-->
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" *ngIf="filteredData.length > 0">
+    <div class="col" *ngFor="let movie of filteredData">
+        <div class="card h-100">
+            <img [src]="movie.imageURL" class="card-img-top" [alt]="movie.title">
+            <div class="card-body">
                 <h5 class="card-title">{{ movie.title }}</h5>
                 <div class="badges">
                     <span class="badge bg-warning">{{ movie.rating }}</span>
                 </div>
                 <p class="card-text">{{ movie.overview }}</p>
-                </div>
-            </div>
             </div>
         </div>
     </div>
+  </div>
+</div>
 </section>
+
+<!--Tabla-->
 <div class="container">
+  <div class="d-grid gap-2 d-md-flex justify-content-md mb-4">
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#primerModal">Nuevo
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+        <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5z"/>
+        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
+      </svg>
+    </button>
+  </div>
+
 <table class="table" style="margin-left: auto; margin-right: auto; max-width: 100%;">
     <thead>
       <tr>
@@ -46,53 +149,135 @@
             <td>{{ movie.rating }}</td>
             <td>{{ movie.overview }}</td>
             <td>
-                <button type="button" class="btn btn-success">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                    </svg>
-                </button> ‎ ‎ ‎                           
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="loadMovieData(movie)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                </svg>
+              </button>
+              ‎ ‎ ‎  
                 <button type="button" class="btn btn-danger" (click)="deleteMovie(movie.id)">
                     <i class="bi bi-pencil-square"></i>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
                     </svg>
                 </button>
-                
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    
-          <div class="container">
-            <form>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Título</span>
-                <input type="text" class="form-control" placeholder="Ingrese el título de la película" [(ngModel)]="movieData.title" name="title">
-              </div>
+   
+
+
           
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon2">Categoría</span>
-                <input type="text" class="form-control" placeholder="Ingrese la categoría de la película" [(ngModel)]="movieData.category" name="category">
-              </div>
-          
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon3">Año</span>
-                <input type="number" class="form-control" placeholder="Ingrese el año de la película" [(ngModel)]="movieData.year" name="year">
-              </div>
-          
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon4">Calificación</span>
-                <input type="number" class="form-control" placeholder="Ingrese la calificación de la película" [(ngModel)]="movieData.rating" name="rating">
-              </div>
-          
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon5">Descripción</span>
-                <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.overview" name="overview">
-              </div>
-          
-              <button type="button" class="btn btn-success" (click)="createMovie()">Crear película</button>
-            </form>
-          </div>
-          
+<!--Modal EDicion-->
+<div class="container g-4">
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Editar Película</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!--Formulario Post-->
+        <div class="container">
+          <form>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Título</span>
+              <input type="text" class="form-control" placeholder="Ingrese el título de la película" [(ngModel)]="movieData.title" name="title">
+            </div>
+        
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon2">Categoría</span>
+              <input type="text" class="form-control" placeholder="Ingrese la categoría de la película" [(ngModel)]="movieData.category" name="category">
+            </div>
+        
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon3">Año</span>
+              <input type="number" class="form-control" placeholder="Ingrese el año de la película" [(ngModel)]="movieData.year" name="year">
+            </div>
+        
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon4">Calificación</span>
+              <input type="number" class="form-control" placeholder="Ingrese la calificación de la película" [(ngModel)]="movieData.rating" name="rating">
+            </div>
+        
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon5">Descripción</span>
+              <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.overview" name="overview">
+            </div>
+          </form> <!-- Cierra el formulario -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="updateMovie()">Actualizar
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal formulario-->
+<!--Modal-->
+<div class="container g-4">
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Editar Película</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!--Formulario Post-->
+            <!--Formulario-->
+            <div class="container">
+              <form>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Título</span>
+                  <input type="text" class="form-control" placeholder="Ingrese el título de la película" [(ngModel)]="movieData.title" name="title">
+                </div>
+            
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon2">Categoría</span>
+                  <input type="text" class="form-control" placeholder="Ingrese la categoría de la película" [(ngModel)]="movieData.category" name="category">
+                </div>
+            
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon3">Año</span>
+                  <input type="number" class="form-control" placeholder="Ingrese el año de la película" [(ngModel)]="movieData.year" name="year">
+                </div>
+            
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon4">Calificación</span>
+                  <input type="number" class="form-control" placeholder="Ingrese la calificación de la película" [(ngModel)]="movieData.rating" name="rating">
+                </div>
+            
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon5">Descripción</span>
+                  <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.overview" name="overview">
+                </div>
+              </form>
+            </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+          <button type="button" class="btn btn-warning" (click)="updateMovie()">Actualizar
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+              <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
