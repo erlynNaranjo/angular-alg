@@ -28,4 +28,9 @@ updateMovie(id: number, movieData: any) {
 }
 
 
+getMoviesByCategory(category: string) {
+  return this.https.get(`${BASE_URL}/movies/?category=${category}`);
+}
+
+
 }

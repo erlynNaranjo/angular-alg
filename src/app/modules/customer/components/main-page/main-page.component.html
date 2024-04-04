@@ -36,9 +36,6 @@
 </nav>
 
 <!--  Modal create-->
-
-
-<!--  Modal create-->
 <div class="modal fade" id="primerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="primerModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -86,40 +83,36 @@
 </div>
 
 
-
-
-
 <!--Tabla de Peliculas-->
 <section id="speakers" class="mt-4 mb-4">
-    <div class="container">
-      <div class="row">
-        <div class="col text-center text-uppercase">
-          <small>Conoce a los </small>
-          <h2>Personajes principales</h2>
-          <br>  
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col text-center text-uppercase">
+        <small>Conoce a los </small>
+        <h2>Personajes principales</h2>
+        <br>  
       </div>
+    </div>
 <!--Presentación de películas-->
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" *ngIf="filteredData.length > 0">
-    <div class="col" *ngFor="let movie of filteredData">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" *ngIf="filteredData.length > 0">
+      <div class="col" *ngFor="let movie of filteredData">
         <div class="card h-100">
-            <img [src]="movie.imageURL" class="card-img-top" [alt]="movie.title">
+          <img [src]="movie.imageURL" class="card-img-top" [alt]="movie.title">
             <div class="card-body">
-                <h5 class="card-title">{{ movie.title }}</h5>
-                <div class="badges">
-                    <span class="badge bg-warning">{{ movie.rating }}</span>
-                </div>
+              <h5 class="card-title">{{ movie.title }}</h5>
+                  <div class="badges">
+                      <span class="badge bg-warning">{{ movie.rating }}</span>
+                  </div>
                 <p class="card-text">{{ movie.overview }}</p>
             </div>
         </div>
+      </div>
     </div>
   </div>
-</div>
 </section>
 
 <!--Tabla-->
 <div class="container">
-
   <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
       <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#primerModal">Nuevo
@@ -128,9 +121,10 @@
           <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
         </svg>
       </button>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+     <!-- Formulario de búsqueda por categoría -->
+      <form class="d-flex mt-3" (submit)="filterByCategory()">
+        <input class="form-control me-2" type="text" placeholder="Buscar" [(ngModel)]="categoryFilter" name="categoryFilter">
+        <button class="btn btn-outline-primary" type="submit">Buscar</button>
       </form>
     </div>
   </nav>
@@ -176,8 +170,6 @@
     </div>
    
 
-
-          
 <!--Modal EDicion-->
 <div class="container g-4">
 <!-- Modal -->
@@ -274,7 +266,6 @@
                 </div>
               </form>
             </div>
-  
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
           <button type="button" class="btn btn-warning" (click)="updateMovie()">Actualizar

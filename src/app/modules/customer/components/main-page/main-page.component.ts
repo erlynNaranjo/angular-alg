@@ -11,6 +11,7 @@ export class MainPageComponent implements OnInit {
   filteredData: any[] = []; // Array para almacenar los resultados filtrados
   movieData: any = {};
   searchTerm: string = ''; 
+  categoryFilter: string = '';
 
   constructor(private customerService: CustomerService) { }
 
@@ -85,6 +86,20 @@ export class MainPageComponent implements OnInit {
     );
     console.log(this.filteredData);
   }
+
+
+  filterByCategory() {
+    if (this.categoryFilter.trim() !== '') {
+      this.filteredData = this.data.filter(movie =>
+        movie.category.toLowerCase().includes(this.categoryFilter.toLowerCase())
+      );
+    } else {
+      this.filteredData = this.data;
+    }
+  }
 }
+
+  
+
 
 
