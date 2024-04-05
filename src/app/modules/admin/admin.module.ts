@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomerRoutingModule } from './customer-routing.module';
+import { AdminRoutingModule } from './admin-routing.module';
+
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    CustomerRoutingModule
+    AdminRoutingModule
   ]
 })
-export class CustomerModule { }
+export class AdminModule { }

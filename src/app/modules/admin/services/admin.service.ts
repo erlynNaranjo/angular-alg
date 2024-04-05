@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
- 
+
 
 const BASE_URL = "http://127.0.0.1:8000";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
-
+export class AdminService {
   constructor(private https: HttpClient) { }
- 
+
+  
   getMovie() {
     return this.https.get(BASE_URL + '/movies');
 }
@@ -26,10 +26,5 @@ createMovie(movieData: any) {
 updateMovie(id: number, movieData: any) {
   return this.https.put(`${BASE_URL}/movies/${id}`, movieData);
 }
-
-getMoviesByCategory(category: string) {
-  return this.https.get(`${BASE_URL}/movies/?category=${category}`);
-}
-
 
 }

@@ -1,0 +1,8 @@
+#footer{
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(131, 133, 24) 0%, rgb(222, 204, 38) 100%, rgb(252, 214, 77) 100%, rgba(0,212,255,1) 100%);
+    }
+    
+    #footer a{
+        color: azure;
+        text-decoration: none;
+    }
