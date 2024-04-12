@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
+import { AuthService } from '../../../../auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-page',
@@ -12,8 +14,11 @@ export class AdminPageComponent implements OnInit {
   movieData: any = {};
   searchTerm: string = ''; 
   categoryFilter: string = '';
+  pageSize: number = 5; // Tamaño de página
+  currentPage: number = 1;
 
-  constructor(private adminservice: AdminService) { }
+  constructor(private adminservice: AdminService, private authService: AuthService, private router: Router) { }
+
 
   ngOnInit() {
     this.getMovies();
@@ -24,12 +29,44 @@ export class AdminPageComponent implements OnInit {
       (data: any) => {
         this.data = data;
         this.filteredData = data;
+        // Llamar a la función para actualizar los datos filtrados al obtener nuevos datos
+        this.updateFilteredData();
         console.log(data);
       },
       (error: any) => {
         console.error('Error fetching movie data:', error);
       }
     );
+  }
+
+    // Función para actualizar los datos filtrados basados en la página actual
+    updateFilteredData() {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      this.filteredData = this.data.slice(startIndex, startIndex + this.pageSize);
+    }
+  
+    // Funciones para navegar a la página anterior y siguiente
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updateFilteredData();
+    }
+  }
+
+  goToNextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updateFilteredData();
+    }
+  }
+
+  // Calcular el número total de páginas
+  get totalPages(): number {
+    return Math.ceil(this.data.length / this.pageSize);
+  }
+
+  getPageNumbers(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
   deleteMovie(id: number) {
@@ -97,6 +134,15 @@ export class AdminPageComponent implements OnInit {
       this.filteredData = this.data;
     }
     console.log(this.filteredData);
+  }
+
+
+  logout(): void {
+    // Eliminar el token del local storage o de la cookie
+    this.authService.removeToken();
+
+    // Redirigir a la página de inicio de sesión
+    this.router.navigate(['/login']);
   }
 }
 

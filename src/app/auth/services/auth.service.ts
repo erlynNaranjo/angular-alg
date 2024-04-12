@@ -25,4 +25,8 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getToken(); // Comprobar si hay un token almacenado
   }
+
+  removeToken(): void {
+    localStorage.removeItem('token'); // Eliminar token del almacenamiento local
+  }
 }

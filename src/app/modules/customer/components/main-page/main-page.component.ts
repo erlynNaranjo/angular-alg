@@ -13,6 +13,7 @@ export class MainPageComponent implements OnInit {
   searchTerm: string = ''; 
   categoryFilter: string = '';
 
+
   constructor(private customerService: CustomerService) { }
 
   ngOnInit() {
@@ -97,6 +98,8 @@ export class MainPageComponent implements OnInit {
       this.filteredData = this.data;
     }
   }
+
+
 }
 
   

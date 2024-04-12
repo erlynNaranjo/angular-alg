@@ -1,8 +1,10 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-light bg" style="background-color: #552e91;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">
+      <img src="../../../../../../img/OIP-removebg-preview.png" alt="ewfwe" width="30" height="24">
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"></span> 
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -35,7 +37,6 @@
   </div>
 </nav>
 
-
 <!--Tabla de Peliculas-->
 <section id="speakers" class="mt-4 mb-4">
   <div class="container">
@@ -43,20 +44,31 @@
       <div class="col text-center text-uppercase">
         <small>Disfruta </small>
         <h2>Las mejores películas</h2>
+        <hr class="bg-danger border-2 border-top border-danger"/>
         <br>  
       </div>
     </div>
 <!--Presentación de películas-->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" *ngIf="filteredData.length > 0">
+    <div class="row row-cols-1 row-cols-md-3   row-cols-lg-4 g-3" *ngIf="filteredData.length > 0">
       <div class="col" *ngFor="let movie of filteredData">
         <div class="card h-100">
-          <img [src]="movie.imageURL" class="card-img-top" [alt]="movie.title">
+          <img [src]="movie.image_url" class="card-img-top" [alt]="movie.title">
             <div class="card-body">
               <h5 class="card-title">{{ movie.title }}</h5>
-                  <div class="badges">
-                      <span class="badge bg-warning">{{ movie.rating }}</span>
-                  </div>
-                <p class="card-text">{{ movie.overview }}</p>
+              <div class="badges d-flex justify-content-between">
+                <span class="badge bg-warning">{{ movie.rating }}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stars" viewBox="0 0 16 16">
+                    <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
+                  </svg>
+                </span>
+                <button type="button" class="btn btn-outline-danger">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
+                    <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"></path>
+                  </svg>
+                  <span class="visually-hidden">Button</span>
+                </button>
+              </div>
+              <p class="card-text">{{ movie.overview }}</p>
             </div>
         </div>
       </div>
@@ -64,4 +76,43 @@
   </div>
 </section>
 
-<!--Tabla-->
+<!--categorias-->
+<div class="container">
+  <div class="row">
+    <div class="col text-center text-uppercase">
+      <h2>Acción</h2>
+      <hr class="bg-danger border-2 border-top border-danger"/>
+      <br>  
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center text-uppercase">
+      <h2>Anime</h2>
+      <hr class="bg-danger border-2 border-top border-danger"/>
+      <br>  
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center text-uppercase">
+      <h2>Crimen</h2>
+      <hr class="bg-danger border-2 border-top border-danger"/>
+      <br>  
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center text-uppercase">
+      <h2>Prueba</h2>
+      <hr class="bg-danger border-2 border-top border-danger"/>
+      <br>  
+    </div>
+  </div>
+</div>

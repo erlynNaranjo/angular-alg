@@ -27,6 +27,14 @@
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
           </li>
         </ul>
+        <form class="d-flex" (submit)="searchMovies()">
+          <button (click)="logout()" class="btn btn-outline-danger" type="submit">Cerrar sesión
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+              <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+            </svg>
+          </button>
+        </form>
       </div>
     </div>
   </nav>
@@ -36,9 +44,10 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="primerModalLabel">AGREGAR PELÍCULA</h5>
+          <h5 class="modal-title justify-content-center" id="primerModalLabel">AGREGAR PELÍCULA</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
         <div class="modal-body">
           <!-- Formulario -->
           <div class="container">
@@ -67,6 +76,12 @@
                 <span class="input-group-text" id="basic-addon5">Descripción</span>
                 <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.overview" name="overview">
               </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon5">Imagen</span>
+                <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.image_url" name="image_url">
+              </div>
+              
             </form>
           </div>
         </div>
@@ -79,17 +94,18 @@
   </div>
   
   <!-- Tabla de Peliculas -->
-  <section id="speakers" class="mt-4 mb-4">
+  <section id="speakers" class="mt-5 mb-3">
     <div class="container">
       <div class="row">
         <div class="col text-center text-uppercase">
           <h2>Tabla de Peliculas</h2>
+          <hr>
           <br>  
         </div>
       </div>
   
       <!-- Formulario de búsqueda por categoría -->
-      <div class="container">
+      <div class="container  ">
         <nav class="navbar bg-body-tertiary">
           <div class="container-fluid">
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#primerModal">Nuevo
@@ -99,21 +115,22 @@
               </svg>
             </button>
             <form class="d-flex mt-3" (submit)="filterByCategory()">
-              <input class="form-control me-2" type="text" placeholder="Buscar" [(ngModel)]="categoryFilter" name="categoryFilter">
+              <input class="form-control me-2" type="text" placeholder="Buscar por categoría" [(ngModel)]="categoryFilter" name="categoryFilter">
               <button class="btn btn-primary" type="submit">Buscar</button>
             </form>
           </div>
         </nav>
   
-        <table class="table" style="margin-left: auto; margin-right: auto; max-width: 100%;">
-          <thead>
+        <table class="table table-light  border-light table-hover mt-4" style="margin-left: auto; margin-right: auto; max-width: 100%;">
+          <thead class="table-success">
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Nombre</th>
               <th scope="col">Categoría</th>
               <th scope="col">Año</th>
-              <th scope="col">Calificación</th>
               <th scope="col">Descripción</th>
+              <th scope="col">Calificación</th>
+              <th scope="col">Imagen (url)</th>
               <th scope="col">Acción</th>
             </tr>
           </thead>
@@ -123,8 +140,9 @@
               <td>{{ movie.title }}</td>    
               <td>{{ movie.category }}</td>
               <td>{{ movie.year }}</td>
-              <td>{{ movie.rating }}</td>
               <td>{{ movie.overview }}</td>
+              <td>{{ movie.rating }}</td>
+              <td>{{ movie.image_url}}</td>
               <td>
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="loadMovieData(movie)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -132,8 +150,8 @@
                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
                   </svg>
                 </button>
-                ‎ ‎ ‎  
-                <button type="button" class="btn btn-outline-danger" (click)="deleteMovie(movie.id)">
+               
+                <button type="button" class="btn btn-outline-danger mt-2" (click)="deleteMovie(movie.id)">
                   <i class="bi bi-pencil-square"></i>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                     <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
@@ -143,8 +161,27 @@
             </tr>
           </tbody>
         </table>
+        <nav aria-label="...">
+          <ul class="pagination pagination-lg justify-content-center">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <button class="page-link" (click)="goToPreviousPage()">Anterior</button>
+            </li>
+            <ng-container *ngFor="let page of getPageNumbers(); let i = index">
+              <li class="page-item" [class.active]="currentPage === (i + 1)">
+                <button class="page-link" (click)="currentPage = i + 1; updateFilteredData()">{{ i + 1 }}</button>
+              </li>
+            </ng-container>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <button class="page-link" (click)="goToNextPage()">Siguiente</button>
+            </li>
+          </ul>
+        </nav>
+        
+        
+        
       </div>
     </div>
+
   </section>
   
   <!-- Modal EDicion -->
@@ -185,6 +222,11 @@
                   <span class="input-group-text" id="basic-addon5">Descripción</span>
                   <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.overview" name="overview">
                 </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon5">Imagen</span>
+                  <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.image_url" name="image_url">
+                </div>
               </form>
             </div>
           </div>
@@ -196,4 +238,3 @@
       </div>
     </div>
   </div>
-  
