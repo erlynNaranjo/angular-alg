@@ -176,15 +176,11 @@
             </li>
           </ul>
         </nav>
-        
-        
-        
       </div>
     </div>
-
   </section>
   
-  <!-- Modal EDicion -->
+<!-- Modal EDicion -->
   <div class="container g-4">
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -194,47 +190,47 @@
             <h5 class="modal-title" id="staticBackdropLabel">Editar Película</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <!-- Formulario Post -->
-            <div class="container">
-              <form>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Título</span>
-                  <input type="text" class="form-control" placeholder="Ingrese el título de la película" [(ngModel)]="movieData.title" name="title">
-                </div>
-  
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon2">Categoría</span>
-                  <input type="text" class="form-control" placeholder="Ingrese la categoría de la película" [(ngModel)]="movieData.category" name="category">
-                </div>
-  
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon3">Año</span>
-                  <input type="number" class="form-control" placeholder="Ingrese el año de la película" [(ngModel)]="movieData.year" name="year">
-                </div>
-  
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon4">Calificación</span>
-                  <input type="number" class="form-control" placeholder="Ingrese la calificación de la película" [(ngModel)]="movieData.rating" name="rating">
-                </div>
-  
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon5">Descripción</span>
-                  <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.overview" name="overview">
-                </div>
+            <div class="modal-body">
+              <!-- Formulario Post -->
+              <div class="container">
+                <form>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Título</span>
+                    <input type="text" class="form-control" placeholder="Ingrese el título de la película" [(ngModel)]="movieData.title" name="title">
+                  </div>
+                     
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon2">Categoría</span>
+                    <input type="text" class="form-control" placeholder="Ingrese la categoría de la película" [(ngModel)]="movieData.category" name="category">
+                  </div>
+    
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon3">Año</span>
+                    <input type="number" class="form-control" placeholder="Ingrese el año de la película" [(ngModel)]="movieData.year" name="year">
+                  </div>
+    
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon4">Calificación</span>
+                    <input type="number" class="form-control" placeholder="Ingrese la calificación de la película" [(ngModel)]="movieData.rating" name="rating">
+                  </div>
+    
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon5">Descripción</span>
+                    <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.overview" name="overview">
+                  </div>
 
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon5">Imagen</span>
-                  <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.image_url" name="image_url">
-                </div>
-              </form>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon5">Imagen</span>
+                    <input type="text" class="form-control" placeholder="Ingrese la descripción de la película" [(ngModel)]="movieData.image_url" name="image_url">
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-outline-success" (click)="updateMovie()">Guardar cambios</button>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-outline-success" (click)="updateMovie()">Guardar cambios</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
